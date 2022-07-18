@@ -53,17 +53,25 @@ class RPSGame:
         game_cnt = 0
         user_win = 0
         com_win = 0
+        uc_sam = 0
+        total_cnt=0
+        total_re = 0
         while True:
-            com_choice = game[random.randint(0,2)]    
+            com_choice = game[random.randint(0,2)]
+            user_choice = input("가위, 바위 보 입력: ")
+            a = game_cnt+1
+            aa = int(count)
+            total_cnt=str(a)+" / "+str(aa)+" 회차 "
+            total_re= "유저:"+ str(user_choice)+", 컴퓨터: " + str(com_choice)
+            print(total_cnt,total_re)
             if game_cnt < int(count):
-                print(game_cnt+1,"/",int(count),"회차")
-                user_choice = input("가위, 바위 보 입력: ")
                 if not user_choice in game:
                     print("입력 오류 다시 입력하세요")
                     continue
                 if user_choice == game[0]:
                     if com_choice == game[0]:
                         print("[결과] 비김")
+                        uc_sam += 1
                     elif com_choice == game[1]:
                         print("[결과] 컴퓨터 승리")
                         com_win += 1
@@ -72,25 +80,27 @@ class RPSGame:
                         user_win += 1
                 elif user_choice == game[1]:
                     if com_choice == game[0]:
-                        print("[결과] 유저승리")
+                        print("[결과] 유저 승리")
                         user_win +=1
                     elif com_choice == game[1]:
                         print("[결과] 비김")
+                        uc_sam += 1
                     elif com_choice == game[2]:
-                        print("[결과] 컴퓨터 승리")
+                        print("[결과] 컴퓨터 이김")
                         com_win += 1
                 elif user_choice == game[2]:
                     if com_choice == game[0]:
-                        print("[결과] 컴퓨터 승리")
+                        print("[결과] 컴퓨터 이김")
                         com_win += 1
                     elif com_choice == game[1]:
-                        print("[결과] 유저승리")
+                        print("[결과] 유저 이김")
                         user_win +=1
                     elif com_choice == game[2]:
                         print("[결과] 비김")
+                        uc_sam += 1
                 game_cnt +=1
             if game_cnt == int(count):
-                print("총",game_cnt,"판",user_win,"승",com_win,"패")
+                print("총",game_cnt,"판",user_win,"승",com_win,"패",uc_sam,"무")
                 break
     
     def show_result(self, number):
