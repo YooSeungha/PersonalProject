@@ -24,7 +24,7 @@ class RPSGame:
         self.gameCount = 0
         self.gameResult = {}
         # print(type(self.gameResult))
-    ''' 
+         
     def play_game(self):
         # 게임 진행 로직 함수
         global count
@@ -42,43 +42,56 @@ class RPSGame:
         except ValueError:
             print('5이하의 "숫자"만 입력가능합니다. ')
             return self.play_game()
-    '''
  
         
     def start_game(self):
-       game = ['가위','바위','보']
-       game_result  = ['승','패','비김']
-       
-       game_cnt = 0
-       user_win = 0
-       com_win = 0
-       # overCount = (int(count)/2 + 1)
-       
-       user_choice = input("가위, 바위, 보 입력:")
-       if not user_choice in game:
-            print("정확히 입력하세요")
-            self.start_game()
-        
-        
-        
-                
-                    
-               
-            
-       
-       
-       
-       
-       ''' # (n/n) 회차
-       while True:
-        if game_cnt < int(count):
-            print(game_cnt+1,"/",int(count),"회차")
-            game_cnt +=1
+        game = ["가위","바위","보"]
+        gameResult = {}
+        global game_cnt
+        global user_win
+        global com_win
+        game_cnt = 0
+        user_win = 0
+        com_win = 0
+        while True:
+            com_choice = game[random.randint(0,2)]    
+            if game_cnt < int(count):
+                print(game_cnt+1,"/",int(count),"회차")
+                user_choice = input("가위, 바위 보 입력: ")
+                if not user_choice in game:
+                    print("입력 오류 다시 입력하세요")
+                    continue
+                if user_choice == game[0]:
+                    if com_choice == game[0]:
+                        print("[결과] 비김")
+                    elif com_choice == game[1]:
+                        print("[결과] 컴퓨터 승리")
+                        com_win += 1
+                    elif com_choice == game[2]:
+                        print("[결과] 유저 승리")
+                        user_win += 1
+                elif user_choice == game[1]:
+                    if com_choice == game[0]:
+                        print("[결과] 유저승리")
+                        user_win +=1
+                    elif com_choice == game[1]:
+                        print("[결과] 비김")
+                    elif com_choice == game[2]:
+                        print("[결과] 컴퓨터 승리")
+                        com_win += 1
+                elif user_choice == game[2]:
+                    if com_choice == game[0]:
+                        print("[결과] 컴퓨터 승리")
+                        com_win += 1
+                    elif com_choice == game[1]:
+                        print("[결과] 유저승리")
+                        user_win +=1
+                    elif com_choice == game[2]:
+                        print("[결과] 비김")
+                game_cnt +=1
             if game_cnt == int(count):
+                print("총",game_cnt,"판",user_win,"승",com_win,"패")
                 break
-       '''
-        #for i in range(int(count)):
-            #print(i)
     
     def show_result(self, number):
         # 게임 결과 검색 함수
@@ -87,8 +100,7 @@ class RPSGame:
 
 if __name__ == "__main__":
     game = RPSGame()
-    # game.play_game()
-    game.start_game()
+    game.play_game()
     # number = input("게임 결과 검색:")
 
     #print(game.show_result(int(number)))
