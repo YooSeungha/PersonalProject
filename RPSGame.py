@@ -113,7 +113,7 @@ class RPSGame:
         # 게임 결과 검색 함수
         if int(number) > int(gameCount):
             print("정확한 회차를 입력하세요")
-            return number
+            #return number
             # return self.show_result()
         elif int(number) <= int(gameCount):
             print(gameResult[int(number)])
