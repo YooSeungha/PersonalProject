@@ -15,7 +15,9 @@
 # 5. 게임 결과는 유저가 "q"를 입력할 때까지 반복해서 결과를 검색할 수 있도록 프로그램을 유지한다.
 # 6. 유저가 "q"를 입력하면 프로그램 종료
 
+from cgi import test
 import random
+from re import A
 
 
 class RPSGame:
@@ -46,7 +48,8 @@ class RPSGame:
         
     def start_game(self):
         game = ["가위","바위","보"]
-        gameResult = {}
+        game_Result = ["유저승리","컴퓨터승리","비김"]
+        # gameResult = {}
         global game_cnt
         global user_win
         global com_win
@@ -54,64 +57,73 @@ class RPSGame:
         user_win = 0
         com_win = 0
         uc_sam = 0
-        total_cnt=0
-        total_re = 0
+        global aaa
+        aaa = []
         while True:
             com_choice = game[random.randint(0,2)]
             user_choice = input("가위, 바위 보 입력: ")
             a = game_cnt+1
             aa = int(count)
-            total_cnt=str(a)+" / "+str(aa)+" 회차 "
-            total_re= "유저:"+ str(user_choice)+", 컴퓨터: " + str(com_choice)
-            print(total_cnt,total_re)
             if game_cnt < int(count):
                 if not user_choice in game:
                     print("입력 오류 다시 입력하세요")
                     continue
                 if user_choice == game[0]:
                     if com_choice == game[0]:
-                        print("[결과] 비김")
+                        # print("[결과] {}".format(game_Result[2]))
+                        aaa=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
                     elif com_choice == game[1]:
-                        print("[결과] 컴퓨터 승리")
+                        # print("[결과] {}".format(game_Result[1]))
+                        aaa = ("[결과] {}".format(game_Result[1]))
                         com_win += 1
                     elif com_choice == game[2]:
-                        print("[결과] 유저 승리")
+                        #print("[결과] {}".format(game_Result[0]))
+                        aaa=("[결과] {}".format(game_Result[0]))
                         user_win += 1
                 elif user_choice == game[1]:
                     if com_choice == game[0]:
-                        print("[결과] 유저 승리")
+                        #print("[결과] {}".format(game_Result[0]))
+                        aaa=("[결과] {}".format(game_Result[0]))
                         user_win +=1
                     elif com_choice == game[1]:
-                        print("[결과] 비김")
+                        #print("[결과] {}".format(game_Result[2]))
+                        aaa=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
                     elif com_choice == game[2]:
-                        print("[결과] 컴퓨터 이김")
+                        #print("[결과] {}".format(game_Result[1]))
+                        aaa = ("[결과] {}".format(game_Result[1]))
                         com_win += 1
                 elif user_choice == game[2]:
                     if com_choice == game[0]:
-                        print("[결과] 컴퓨터 이김")
+                        #print("[결과] {}".format(game_Result[1]))
+                        aaa = ("[결과] {}".format(game_Result[1]))
                         com_win += 1
                     elif com_choice == game[1]:
-                        print("[결과] 유저 이김")
+                        #print("[결과] {}".format(game_Result[0]))
+                        aaa = ("[결과] {}".format(game_Result[0]))
                         user_win +=1
                     elif com_choice == game[2]:
-                        print("[결과] 비김")
+                        #print("[결과] {}".format(game_Result[2]))
+                        aaa=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
+                print("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(a,aa,user_choice,com_choice,aaa))
                 game_cnt +=1
             if game_cnt == int(count):
                 print("총",game_cnt,"판",user_win,"승",com_win,"패",uc_sam,"무")
                 break
+            
     
     def show_result(self, number):
         # 게임 결과 검색 함수
-        return self.gameResult[number]
+        pass
+        # return self.gameResult[number]
 
 
 if __name__ == "__main__":
     game = RPSGame()
     game.play_game()
-    # number = input("게임 결과 검색:")
+    number = input("게임 결과 검색:")
+    game.show_result(number)
 
     #print(game.show_result(int(number)))
-
