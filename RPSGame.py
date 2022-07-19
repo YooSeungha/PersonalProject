@@ -25,18 +25,19 @@ class RPSGame:
         # 멤버 변수 선언 및 초기 세팅5
         self.gameCount = 0
         self.gameResult = {}
+        self.aaa = []
         # print(type(self.gameResult))
          
     def play_game(self):
         # 게임 진행 로직 함수
-        global count
-        count = input("게임 횟수 입력:")
+        global gameCount
+        gameCount = input("게임 횟수 입력:")
         try:
-            if int(count) == 0:
+            if int(gameCount) == 0:
                 print("0 이상 을 입력하세요")
                 self.play_game()
-            elif int(count) <= 5:
-                print("게임수 : ", count)
+            elif int(gameCount) <= 5:
+                print("게임수 : ", gameCount)
                 self.start_game()
             else:
                 print('"5"이하만 입력가능합니다.')
@@ -49,24 +50,20 @@ class RPSGame:
     def start_game(self):
         game = ["가위","바위","보"]
         game_Result = ["유저승리","컴퓨터승리","비김"]
-        # gameResult = {}
-        global game_cnt
-        global user_win
-        global com_win
+        global gameResult
+        gameResult = {}
         game_cnt = 0
         user_win = 0
         com_win = 0
         uc_sam = 0
-        global aaa
-        aaa = []
         while True:
             com_choice = game[random.randint(0,2)]
             user_choice = input("가위, 바위 보 입력: ")
             a = game_cnt+1
-            aa = int(count)
-            if game_cnt < int(count):
+            aa = int(gameCount)
+            if game_cnt < int(gameCount):
                 if not user_choice in game:
-                    print("입력 오류 다시 입력하세요")
+                    print("5 이하의 숫자만 입력하세요")
                     continue
                 if user_choice == game[0]:
                     if com_choice == game[0]:
@@ -108,15 +105,18 @@ class RPSGame:
                         aaa=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
                 print("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(a,aa,user_choice,com_choice,aaa))
+                gameResult[a] = ("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(a,aa,user_choice,com_choice,aaa))
                 game_cnt +=1
-            if game_cnt == int(count):
+            if game_cnt == int(gameCount):
                 print("총",game_cnt,"판",user_win,"승",com_win,"패",uc_sam,"무")
                 break
             
     
-    def show_result(self, number):
+    def show_result(self,number):
         # 게임 결과 검색 함수
-        pass
+        
+        if int(number) == 1:
+            print(gameResult[0])
         # return self.gameResult[number]
 
 
@@ -124,6 +124,5 @@ if __name__ == "__main__":
     game = RPSGame()
     game.play_game()
     number = input("게임 결과 검색:")
-    game.show_result(number)
-
+    game.show_result()
     #print(game.show_result(int(number)))
