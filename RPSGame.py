@@ -15,10 +15,7 @@
 # 5. 게임 결과는 유저가 "q"를 입력할 때까지 반복해서 결과를 검색할 수 있도록 프로그램을 유지한다.
 # 6. 유저가 "q"를 입력하면 프로그램 종료
 
-from cgi import test
 import random
-from re import A
-
 
 class RPSGame:
     def __init__(self):
@@ -114,15 +111,24 @@ class RPSGame:
     
     def show_result(self,number):
         # 게임 결과 검색 함수
-        
-        if int(number) == 1:
-            print(gameResult[0])
-        # return self.gameResult[number]
+        if int(number) > int(gameCount):
+            print("정확한 회차를 입력하세요")
+            return number
+            # return self.show_result()
+        elif int(number) <= int(gameCount):
+            print(gameResult[int(number)])
+            quit = input('종료하시려면 "q"를 입력하세요: ')
+            if quit in('q','Q','ㅃ','ㅂ'):
+                print("게임을 종료합니다")
+                return False
+            else:
+                return number
+            # return self.gameResult[number]
 
 
 if __name__ == "__main__":
     game = RPSGame()
     game.play_game()
     number = input("게임 결과 검색:")
-    game.show_result()
+    game.show_result(int(number))
     #print(game.show_result(int(number)))
