@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<center>
+    <h1>soo's index.html</h1>
+    <br>
+    <a href="list">주소록</a><br/>
+    <a href="b_list">게시판</a><br/>
+    <br/><br/>
+
+    <!--login_ok_user: {{request.session.login_ok_user}}-->
+    <br/>
+    {% if request.session.login_ok_user %}
+        <a href="logout">로그아웃</a>
+    {% else %}
+        <a href="login">로그인</a>
+    {% endif %}
+    <br/><br/>
+    <a href="template1">템플릿1</a>
+    <a href="template2">템플릿2</a>
+    <a href="template3">템플릿3</a>
+    <a href="template4">템플릿4</a>
+    <br/>
+    <a href="template5">템플릿5</a>
+    <a href="template6">템플릿6</a>
+    <a href="template7">템플릿7</a>
+    <a href="template8">템플릿8</a>
+
+</center>

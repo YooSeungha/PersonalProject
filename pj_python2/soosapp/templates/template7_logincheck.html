@@ -1,0 +1,8 @@
+{% if not request.session.login_ok_user %}
+	<script language="javascript">
+		alert("회원가입 후 이용가능합니다");
+		console.log("서비스 이용 불가");
+		//location.href="../"
+		history.back();
+	</script>
+{% endif %}

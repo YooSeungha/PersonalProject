@@ -1,0 +1,59 @@
+{% for x in fruits %}
+    <div>{{x}}</div>
+{% endfor %}
+
+{% for x in cars %}
+    <div>{{x.brand}} / {{x.model}} / {{x.year}}</div>
+{% endfor %}
+
+{% for address in addresses %}
+    <strong>{{address.id}}</strong>
+    <div>{{address.name}} / {{address.addr}}/{{address.rdate}}</div>
+{% endfor %}
+<br/>
+{% for address in addresses reversed %}
+    <strong>{{address.id}}</strong>
+    <div>{{address.name}} / {{address.addr}}/{{address.rdate}}</div>
+{% endfor %}
+
+<br/>
+{% for x in emptyobjs %}
+    <li>x</li>
+{% empty %}
+    empty
+{% endfor %}
+
+<br/>
+{% for x in fruits %}
+<div>순서: {{forloop.counter0}}</div>
+<div>{{x}}</div>
+{% endfor %}
+
+<br/>
+{% for x in fruits %}
+    <li {% if forloop.first %}
+            style = 'background-color : pink'
+        {% endif %}
+        >{{x}}</li>
+{% endfor%}
+
+<br/>
+{% for x in fruits %}
+    <li {% if forloop.last %}
+            style = 'background-color : yellow'
+        {% endif %}
+        >{{x}}</li>
+{% endfor %}
+
+<br/>
+{% for x in fruits %}
+<div>순서: {{forloop.revcounter}}</div>
+<div>{{x}}</div>
+{% endfor %}
+
+
+<br/>
+{% for x in fruits %}
+<div>순서: {{forloop.revcounter0}}</div>
+<div>{{x}}</div>
+{% endfor %}

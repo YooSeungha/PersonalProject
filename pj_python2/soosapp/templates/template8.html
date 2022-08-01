@@ -1,0 +1,19 @@
+{% with name="Whale" %}
+    <p>Hello {{name|upper}} world</p>
+{% endwith %}
+
+{% with name="whale" %}
+    <p>Hello {{name|first|upper}} world</p>
+{% endwith %}
+
+{% with name="Whale" %}
+    <p>Hello {{name|first|lower}} world</p>
+{% endwith %}
+
+{% filter upper %}
+<p> Good morning Whale </p>
+{% endfilter %}
+
+{% filter upper|linenumbers|lower %}What
+makes you
+so happy{% endfilter %}

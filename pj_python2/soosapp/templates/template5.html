@@ -1,0 +1,24 @@
+{% for address in addresses %}
+    <li style="background-color:{% cycle 'white' 'lightgray'%}">
+        {{address.name}}
+    </li>
+{% endfor %}
+<br/>
+{% for address in addresses %}
+    {% cycle 'white' 'lightgray' 'yellow' 'lightblue' as bgc silent %}
+    <li style="background-color:{{bgc}}">
+        {{address.name}}
+    </li>
+{% endfor %}
+<br/><br/>
+{% for address in addresses %}
+    {% cycle 'white' 'lightgray' 'yellow' 'lightblue' as bgc silent %}
+    {% if forloop.counter == 1 %}
+        {% resetcycle %}
+    {% endif %}
+    <li style="background-color:{{bgc}}">
+        {{address.name}}
+    </li>
+{% endfor %}
+
+

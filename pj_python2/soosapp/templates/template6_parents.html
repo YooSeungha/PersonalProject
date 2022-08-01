@@ -1,0 +1,12 @@
+<body>
+    <h3>template6_parents.html</h3>
+    {% block subject %}
+        <h4>주소록</h4>
+    {% endblock %}
+    <br/>
+    {% block content %}
+        {% for address in addresses %}
+        <li>{{address.name}}</li>
+        {% endfor %}
+    {% endblock %}
+</body>
