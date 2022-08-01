@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<style>
+    a {
+      text-decoration-line: none;
+    }
+    a:visited {text-decoration: none; color: black;}
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+        margin-left: 20%;
+        width: 80%;
+        height: 50px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .info {
+        display: flex;
+        align-items: center;
+        width: 300px;
+        justify-content: flex-end;
+    }
+    
+    .info p {
+        padding-right: 5px;
+        font-size: 0.9rem;
+    }
+    
+    .info button {
+        height: 30px;
+    }
+    
+    
+</style>
+<center>
+    {% if login_state == 0 %}
+    <div class="menu">
+        <h2><a href="list">회원 목록</a></h2>
+        <h2><a href="b_list">게시판</a></h2>
+        <h2 style="width: 250px"><a href="{% url 'login' %}">로그인</a></h2>
+    </div>
+    {% elif login_state == 1 %}
+    <div class="menu">
+            <h2><a href="list">회원 목록</a></h2>
+            <h2><a href="b_list">게시판</a></h2>
+            <div class="info">
+                <div>
+                    <p>{{ login_session.name }}님 {{ login_session.email }}<p>
+                </div>
+                <div>
+                    <button><a href="logout">로그아웃</a></button>
+                </div>
+            </div>
+    </div>
+    {% endif %}
+    
+    
+</center>
+<br>
+<script type="javascript">
+</script>

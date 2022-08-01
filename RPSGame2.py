@@ -19,6 +19,7 @@ from cgi import test
 from itertools import count
 import random
 from re import A
+from unittest import result
 
 
 class RPSGame:
@@ -26,7 +27,7 @@ class RPSGame:
         # 멤버 변수 선언 및 초기 세팅5
         self.gameCount = 0
         self.gameResult = {}
-        self.aaa = []
+        self.result = []
         # print(type(self.gameResult))
          
     def play_game(self):
@@ -57,58 +58,48 @@ class RPSGame:
         game_cnt = 0
         user_win = 0
         com_win = 0
-        uc_sam = 0
+        uc_sam = 0 # 유저, 컴퓨터 비길때
         while True:
             com_choice = game[random.randint(0,2)]
             user_choice = input("가위, 바위 보 입력: ")
-            global a
-            a = game_cnt+1
-            aa = int(gameCount)
+            to_game = game_cnt+1
+            to_count = int(gameCount)
             if game_cnt < int(gameCount):
                 if not user_choice in game:
-                    print("5 이하의 숫자만 입력하세요")
+                    print("\n5 이하의 '숫자'또는 '한글'만 입력하세요")
                     continue
                 if user_choice == game[0]:
                     if com_choice == game[0]:
-                        # print("[결과] {}".format(game_Result[2]))
-                        aaa=("[결과] {}".format(game_Result[2]))
+                        result=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
                     elif com_choice == game[1]:
-                        # print("[결과] {}".format(game_Result[1]))
-                        aaa = ("[결과] {}".format(game_Result[1]))
+                        result = ("[결과] {}".format(game_Result[1]))
                         com_win += 1
                     elif com_choice == game[2]:
-                        #print("[결과] {}".format(game_Result[0]))
-                        aaa=("[결과] {}".format(game_Result[0]))
+                        result=("[결과] {}".format(game_Result[0]))
                         user_win += 1
                 elif user_choice == game[1]:
                     if com_choice == game[0]:
-                        #print("[결과] {}".format(game_Result[0]))
-                        aaa=("[결과] {}".format(game_Result[0]))
+                        result=("[결과] {}".format(game_Result[0]))
                         user_win +=1
                     elif com_choice == game[1]:
-                        #print("[결과] {}".format(game_Result[2]))
-                        aaa=("[결과] {}".format(game_Result[2]))
+                        result=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
                     elif com_choice == game[2]:
-                        #print("[결과] {}".format(game_Result[1]))
-                        aaa = ("[결과] {}".format(game_Result[1]))
+                        result = ("[결과] {}".format(game_Result[1]))
                         com_win += 1
                 elif user_choice == game[2]:
                     if com_choice == game[0]:
-                        #print("[결과] {}".format(game_Result[1]))
-                        aaa = ("[결과] {}".format(game_Result[1]))
+                        result = ("[결과] {}".format(game_Result[1]))
                         com_win += 1
                     elif com_choice == game[1]:
-                        #print("[결과] {}".format(game_Result[0]))
-                        aaa = ("[결과] {}".format(game_Result[0]))
+                        result = ("[결과] {}".format(game_Result[0]))
                         user_win +=1
                     elif com_choice == game[2]:
-                        #print("[결과] {}".format(game_Result[2]))
-                        aaa=("[결과] {}".format(game_Result[2]))
+                        result=("[결과] {}".format(game_Result[2]))
                         uc_sam += 1
-                print("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(a,aa,user_choice,com_choice,aaa))
-                gameResult[a] = ("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(a,aa,user_choice,com_choice,aaa))
+                print("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(to_game,to_count,user_choice,com_choice,result))
+                gameResult[to_game] = ("({}/{}) 회차 유저: {}, 컴퓨터: {} {}".format(to_game,to_count,user_choice,com_choice,result))
                 game_cnt +=1
             if game_cnt == int(gameCount):
                 print("총",game_cnt,"판",user_win,"승",com_win,"패",uc_sam,"무")
@@ -117,21 +108,26 @@ class RPSGame:
     
     #def show_result(self,number):
     def show_result(self):
-        number = input("게임 결과 검색:")
-        # 게임 결과 검색 함수
-        while True:
-            if int(number) > int(gameCount):
-                print("정확한 회차를 입력하세요")
-                return self.show_result()
-            else:
-                print(gameResult[int(number)])
-                quit = input('종료하시려면 "Q"를 입력하세요 :')
-                if quit in('q','Q','ㅂ','ㅃ'):
-                    print("게임을 종료합니다")
+            # 게임 결과 검색 함수
+        try:
+            while True:
+                number = input("\n게임 결과 검색을 하시려면 숫자를 하시거나 \n 종료를 원하시면 'Q'를 입력하세요 ")
+                if number in ('q','Q','ㅂ','ㅃ'):
+                    print("\n게임을 종료합니다")
                     return False
-                else:
+                elif int(number) <= int(gameCount):
+                     print("\n", gameResult[int(number)])
+                elif int(number) > int(gameCount):
+                    print("\n정확한 회차를 '범위'안에서 입력하세요 ")
+                    return self.show_result()
+                elif number not in ('q','Q','ㅂ','ㅃ'):
+                    print("\n숫자 또는 Q만 입력 가능합니다.")
                     return self.show_result()
 
+        except ValueError:
+            print("\n'Q'또는 숫자만 입력가능합니다")
+            return self.show_result()
+        
 if __name__ == "__main__":
     game = RPSGame()
     game.play_game()

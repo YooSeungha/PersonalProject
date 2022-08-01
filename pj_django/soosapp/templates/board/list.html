@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Django Board </title>
+    <meta charset="utf-8">
+    <style>
+		a{text-decoration:none}
+
+    </style>
+</head>
+<body>
+<center>
+    <font color='gray' size='4' face='휴먼편지체'>
+        <hr width='600' size='2' color='gray' noshade>
+        <h3> Django Board</h3>
+        <font color='gray' size='4' face='휴먼편지체'>
+            <a href='{% url "index" %}'>인덱스</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{% url "b_write" %}'>글쓰기</a><br/>
+        </font>
+        <hr width='600' size='2' color='gray' noshade>
+
+        <TABLE border='2' width='600' align='center' noshade>
+            <TR size='2' align='center' noshade bgcolor='AliceBlue'>
+                <th bgcolor='AliceBlue'>no</th>
+                <th color='gray'>writer</th>
+                <th color='gray'>e-mail</th>
+                <th color='gray'>subject</th>
+                <th color='gray'>date</th>
+            </TR>
+
+
+            {% for board in boards %}
+            <TR align='center' noshade>
+                <TD>{{ board.id }}</TD>
+                <TD>{{ board.writer }}</TD>
+                <TD>{{ board.email }}</TD>
+                <TD>
+                    <a href="{% url 'b_content' board.id %}">
+                        {{ board.subject }}
+                    </a>
+                </TD>
+                <TD>{{ board.rdate }}</TD>
+            </TR>
+            {% endfor %}
+
+        </TABLE>
+
+        <hr width='600' size='2' color='gray' noshade>
+        <font color='gray' size='3' face='휴먼편지체'>
+            (총페이지수 : {{ total_page }})
+            &nbsp;&nbsp;&nbsp;
+            {% for page in pages %}
+            <a href="{% url 'b_list' %}?page={{page}}">
+                {{page}}
+            </a>&nbsp
+            {% endfor %}
+            ( TOTAL : {{ b_count }} )
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               페이지 싸이즈 :
+            <select id="psId" name="ps" onchange="f(this)">
+                <option selected value="5">선택</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+            </select>
+
+            <script language="javascript">
+                var el = document.getElementById("psId");
+                el.getElementsByTagName('option')[{{ ps }}].selected = 'selected';
+                function f(select){
+                   //var el = document.getElementById("psId");
+                   //alert("ps : " + ps);
+
+                   //el.getElementsByTagName('option')[ps].selected = 'selected';
+                   var ps = select.value;
+                   //var req = new XMLHttpRequest();
+                   //ps = "?ps=" + ps.toString();
+                   //req.open("GET", ps);
+                   //req.send();
+                   location.href="{% url 'b_list' %}?ps="+ps;
+               }
+            </script>
+
+        </font>
+        <hr width='600' size='2' color='gray' noshade>
+
+</center>
+</body>
+</html>
