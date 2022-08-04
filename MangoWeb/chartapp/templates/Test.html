@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+{% block head %}
+<style type="text/css">
+    .image {
+        height: 100%;
+        width: 100%;
+        max-height: 200px;
+    }
+    .info {
+        max-width: 1000px;
+    }
+    canvas { 
+        height: 250px;
+        max-height: 250px;
+    }
+    .card-text, badge {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .center {
+       text-align: center;
+    }
+    .notdot{
+        list-style:none;
+    }
+</style>
+
+{% endblock %}
+{% block main %}
+{% load static %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4" style="text-align-last: left;">생각보다맛있는집<span> 4.0</span></h1>
+    <ol class="breadcrumb m-0 mx-2 mb-2">
+        <li class="breadcrumb-item active ">Restaurant Information</li>
+    </ol>
+    <div class="mb-3 info">
+        <div class="row col-sm-8 col-md-12 mb-5" style="--bs-columns: 3;">
+            <div class="col-md-6">
+              <img src="{% static '/imgs/restaurant/탄탄면공방.jpg' %}" class="imag-fluid img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-6">
+              <div class="" style="text-align: -webkit-left;">
+                <p class="card-text"><span class="badge bg-secondary">주소</span> 
+                <br/>서울특별시 관악구 관악로 152 서량빌딩</p>
+                <p class="card-text"><span class="badge bg-secondary">전화번호</span> 
+                <br/>02-877-5717</p>
+                <p class="card-text"><span class="badge bg-secondary">가격대</span> 
+                <br/>2만원 - 3만원</p>
+                <span class="card-text"><span class="badge bg-secondary">메뉴/가격</span> 
+                    <ul class="menu_list">
+                        <li class="menu_Item notdot">
+                            <span class="res_menu">삼겹살(200g)</span>
+                            <span class="res_price">15,000원</span>
+                        </li>
+                        <li class="menu_Item notdot">
+                            <span class="res_menu">항정살(200g)</span>
+                            <span class="res_price">15,000원</span>
+                        </li>
+                        <li class="menu_Item notdot">
+                            <span class="res_menu">목살(200g)</span>
+                            <span class="res_price">15,000원</span>
+                        </li>
+                        <li class="menu_Item notdot">
+                            <span class="res_menu">갈매기살(200g)</span>
+                            <span class="res_price">15,000원</span>
+                        </li>
+                        <li class="menu_Item notdot">
+                            <span class="res_menu">흑우(200g)</span>
+                            <span class="res_price">15,000,000원</span>
+                        </li>
+                    </ul>
+              </div>
+            </div>
+        </div>
+        <div class = 'row gx-4'>
+            <div class="col-sm-4">
+                <div id = "map" class="map mb-4"><canvas id ="mymap" width=100% height=100%></canvas>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2a8bbc9cc398b24e54b7af1fb65329b"></script>
+                        <script>
+                            var a = addr_x['count'][0]
+                            var b = addr_y['count'][0]
+                            var container = document.getElementById('map');
+                            var options = {
+                            center: new kakao.maps.LatLng(b,a),
+                            level: 3
+                        };
+                        var map = new kakao.maps.Map(container, options);
+                        var markerPosiotion = new kakao.maps.LatLng(b,a);
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosiotion
+                        })
+                        marker.setMap(map);
+                    </script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-1"></i>
+                        인기 단어 TOP5
+                    </div>
+                    <div class="card-body"><canvas id="myBarChart" width="100%" height="100%"></canvas></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie me-1"></i>
+                        맛집 리뷰
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myPieChart" width="100%" height="100%" class="chartjs-render-monitor" style="display: block; width: 845px; height: 422px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+{% endblock %}
